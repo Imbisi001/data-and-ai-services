@@ -3,20 +3,1041 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Portfolio</title>
-    <!-- Font Awesome (your existing CDN) -->
+    <title>Stephen Imbisi | Data & AI Specialist</title>
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-purple: #9600ff;
+            --dark-bg: #0a0a12;
+            --darker-bg: #050508;
+            --text: #e0e0e0;
+            --text-dim: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'Rajdhani';
+            src: url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap');
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(10, 10, 30, 0.8) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(10, 10, 30, 0.8) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            padding: 2rem 0;
+            position: relative;
+            border-bottom: 1px solid rgba(160, 160, 160, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--neon-blue);
+        }
+
+        nav ul li a::before {
+            content: '// ';
+            color: var(--neon-purple);
+        }
+
+        .hero {
+            padding: 8rem 0 5rem;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 3rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--neon-blue);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.5s;
+        }
+
+        .hero-image:hover img {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero h1 span {
+            display: block;
+            font-size: 1.8rem;
+            color: var(--neon-purple);
+            margin-top: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+        }
+
+        .terminal {
+            background-color: var(--darker-bg);
+            border: 1px solid rgba(160, 160, 160, 0.1);
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(160, 160, 160, 0.1);
+        }
+
+        .terminal-header {
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            display: flex;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .terminal-btn.red {
+            background-color: #ff5f56;
+        }
+
+        .terminal-btn.yellow {
+            background-color: #ffbd2e;
+        }
+
+        .terminal-btn.green {
+            background-color: #27c93f;
+        }
+
+        .terminal-content {
+            margin-top: 20px;
+        }
+
+        .terminal-line {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-prompt {
+            color: var(--neon-blue);
+            margin-right: 10px;
+        }
+
+        .terminal-command {
+            color: var(--neon-purple);
+        }
+
+        .terminal-output {
+            color: var(--text-dim);
+            margin-left: 30px;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            color: black;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 3px;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), transparent);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-dim);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background-color: var(--darker-bg);
+            border: 1px solid rgba(160, 160, 160, 0.1);
+            padding: 1.5rem;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--neon-purple);
+        }
+
+        .skill-card h4 {
+            color: var(--neon-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-card h4::before {
+            content: '▹';
+            color: var(--neon-purple);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .skill-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Project Tabs */
+        .project-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .project-tab {
+            padding: 0.8rem 1.5rem;
+            background: var(--darker-bg);
+            border: 1px solid var(--neon-purple);
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .project-tab.active {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            color: black;
+            font-weight: bold;
+        }
+        
+        .project-category {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .project-category.active {
+            display: grid;
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--darker-bg);
+            border: 1px solid rgba(160, 160, 160, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .project-content p {
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: rgba(96, 0, 255, 0.2);
+            color: var(--neon-purple);
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .impact {
+            font-style: italic;
+            color: var(--neon-blue);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background-color: var(--darker-bg);
+            border: 1px solid rgba(160, 160, 160, 0.1);
+            padding: 2rem;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+        }
+
+        .contact-card h3 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-card h3 i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-card p {
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--neon-purple);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--neon-blue);
+            text-decoration: underline;
+        }
+
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(160, 160, 160, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-dim);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .copyright {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.3;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            nav ul {
+                display: none;
+            }
+            
+            .project-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                opacity: 1;
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                opacity: 0.5;
+            }
+        }
+
+        .flicker {
+            animation: flicker 3s infinite alternate;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Add your custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Your existing code -->
     <div class="grid-lines"></div>
     <div class="scanlines"></div>
-    <header>...</header>
-    <footer>...</footer>
 
-    <!-- Add your JS before </body> -->
-    <script src="js/script.js"></script>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">STEPHEN IMBISI</div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>DATA & AI <span>SPECIALIST</span></h1>
+                    <p class="flicker">I transform raw data into actionable insights through advanced analytics and machine learning. My passion lies at the intersection of data science and business intelligence.</p>
+                    
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-btn red"></div>
+                            <div class="terminal-btn yellow"></div>
+                            <div class="terminal-btn green"></div>
+                        </div>
+                        <div class="terminal-content">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-command">who am I</span>
+                            </div>
+                            <div class="terminal-output">Stephen Imbisi - Data Analyst & AI Enthusiast</div>
+                            
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-command">skills</span>
+                            </div>
+                            <div class="terminal-output">Python | SQL | Machine Learning | Data Visualization | Statistics</div>
+                            
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-command">contact</span>
+                            </div>
+                            <div class="terminal-output">+254 758 324 056 | imbisistephen@gmail.com | linkedin.com/in/stephenimbisi</div>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn floating">Connect With Me</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Data Visualization">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Turning Data Into Decisions</h3>
+                    <p>I am a results-driven data analyst and AI enthusiast with a passion for creating intelligent solutions, statistical modeling, and clean visualizations. I enjoy blending technical skills with creativity to bring impactful ideas to life.</p>
+                    <p>With expertise in Python, SQL, and machine learning frameworks, I specialize in extracting meaningful patterns from complex datasets. My approach combines rigorous statistical methods with intuitive visual storytelling.</p>
+                                    </div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4>Data Analysis</h4>
+                        <p>Pandas, NumPy, SQL, Excel, Power BI</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>Machine Learning</h4>
+                        <p>Scikit-learn, TensorFlow, PyTorch</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>Data Visualization</h4>
+                        <p>Matplotlib, Seaborn, Plotly, Tableau</p>
+                    </div>
+                    <div class="skill-card">
+                        <h4>Big Data</h4>
+                        <p>Spark, Hadoop, AWS, Google Cloud</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Analytics Portfolio</h2>
+            </div>
+            <div class="project-tabs">
+                <div class="project-tab active" data-category="business">Business Analytics</div>
+                <div class="project-tab" data-category="social">Public Data</div>
+                <div class="project-tab" data-category="ai">AI Analytics</div>
+                <div class="project-tab" data-category="geospatial">Geospatial</div>
+                <div class="project-tab" data-category="advanced">Case Studies</div>
+            </div>
+           <div class="project-categories">
+                <!-- Business Analytics Projects -->
+                <div class="project-category active" id="business">
+                    <div class="projects-container">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="E-commerce Dashboard">
+                            </div>
+                            <div class="project-content">
+                                <h3>E-commerce Sales Dashboard</h3>
+                                <p>Analyzed product sales, customer segments, and seasonal trends to optimize inventory and marketing strategies.</p>
+                                <div>
+                                    <span class="tech-tag">Excel</span>
+                                    <span class="tech-tag">Power BI</span>
+                                    <span class="tech-tag">Tableau</span>
+                                </div>
+                                <p class="impact">Result: 22% increase in conversion rates through targeted promotions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Web Analytics">
+                            </div>
+                            <div class="project-content">
+                                <h3>Website Conversion Analysis</h3>
+                                <p>Identified top content, traffic sources, and drop-off points using GA4 data, leading to UX improvements.</p>
+                                <div>
+                                    <span class="tech-tag">Google Analytics</span>
+                                    <span class="tech-tag">Data Studio</span>
+                                    <span class="tech-tag">Hotjar</span>
+                                </div>
+                                <p class="impact">Result: 35% reduction in bounce rate on key pages</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Public Data Projects -->
+                <div class="project-category" id="social">
+                    <div class="projects-container">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Food Security">
+                            </div>
+                            <div class="project-content">
+                                <h3>Global Food Security Analysis</h3>
+                                <p>Analyzed FAO datasets to identify correlations between climate patterns and agricultural yields across East Africa.</p>
+                                <div>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Pandas</span>
+                                    <span class="tech-tag">Plotly</span>
+                                </div>
+                                <p class="impact">Key finding: Identified 3 high-risk regions for food insecurity</p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="COVID Analysis">
+                            </div>
+                            <div class="project-content">
+                                <h3>COVID-19 Impact Study</h3>
+                                <p>Correlated infection rates with mobility data and government interventions across 5 African countries.</p>
+                                <div>
+                                    <span class="tech-tag">R</span>
+                                    <span class="tech-tag">Shiny</span>
+                                    <span class="tech-tag">GIS</span>
+                                </div>
+                                <p class="impact">Published findings used by 2 regional health organizations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Analytics Projects -->
+                <div class="project-category" id="ai">
+                    <div class="projects-container">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+                            </div>
+                            <div class="project-content">
+                                <h3>Prompt Quality Evaluation</h3>
+                                <p>Developed metrics to track AI prompt clarity, response accuracy, and user satisfaction scores.</p>
+                                <div>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">NLP</span>
+                                    <span class="tech-tag">Dash</span>
+                                </div>
+                                <p class="impact">Improved average response quality by 40% through iterative testing</p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Sentiment Analysis">
+                            </div>
+                            <div class="project-content">
+                                <h3>Product Review Sentiment Analysis</h3>
+                                <p>Classified 50,000+ customer reviews using NLP techniques to identify product improvement opportunities.</p>
+                                <div>
+                                    <span class="tech-tag">TensorFlow</span>
+                                    <span class="tech-tag">NLTK</span>
+                                    <span class="tech-tag">Streamlit</span>
+                                </div>
+                                <p class="impact">92% accuracy in detecting negative experiences for rapid response</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Geospatial Projects -->
+                <div class="project-category" id="geospatial">
+                    <div class="projects-container">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Renewable Energy">
+                            </div>
+                            <div class="project-content">
+                                <h3>Renewable Energy Access Mapping</h3>
+                                <p>Identified optimal locations for solar/wind deployment using geospatial and demographic data.</p>
+                                <div>
+                                    <span class="tech-tag">QGIS</span>
+                                    <span class="tech-tag">PostGIS</span>
+                                    <span class="tech-tag">Python</span>
+                                </div>
+                                <p class="impact">Supported 3 rural electrification projects</p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Traffic Analysis">
+                            </div>
+                            <div class="project-content">
+                                <h3>Urban Traffic Pattern Analysis</h3>
+                                <p>Modeled congestion patterns in Nairobi using open traffic data to suggest alternative routing.</p>
+                                <div>
+                                    <span class="tech-tag">GeoPandas</span>
+                                    <span class="tech-tag">Folium</span>
+                                    <span class="tech-tag">OSMnx</span>
+                                </div>
+                                <p class="impact">Potential 18% reduction in peak travel times</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Case Studies -->
+                <div class="project-category" id="advanced">
+                    <div class="projects-container">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Retail Forecasting">
+                            </div>
+                            <div class="project-content">
+                                <h3>Retail Sales Forecasting</h3>
+                                <p>Developed Prophet models to predict demand with 88% accuracy, optimizing inventory levels.</p>
+                                <div>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Prophet</span>
+                                    <span class="tech-tag">SQL</span>
+                                </div>
+                                <p class="impact">Reduced overstock by $250K monthly</p>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card">
+                            <div class="project-image">
+                                <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" alt="Legacy System">
+                            </div>
+                            <div class="project-content">
+                                <h3>Legacy System Optimization</h3>
+                                <p>Analyzed COBOL report generation bottlenecks and implemented efficiency improvements.</p>
+                                <div>
+                                    <span class="tech-tag">COBOL</span>
+                                    <span class="tech-tag">DB2</span>
+                                    <span class="tech-tag">JCL</span>
+                                </div>
+                                <p class="impact">75% faster report generation for critical business processes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                    <p>GMT +3 | Available Mon - Fri</p>
+                    <p>Flexible to US and Europe time zones</p>
+                </div>
+                <div class="contact-card">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p><a href="mailto:imbisistephen@gmail.com">imbisistephen@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p><a href="tel:+254758324056">+254 758 324 056</a></p>
+                </div>
+            </div>
+        </div>
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://linkedin.com/in/stephenimbisi" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">&copy; <span id="year"></span> Stephen Imbisi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Terminal typing effect
+        const terminalLines = document.querySelectorAll('.terminal-command, .terminal-output');
+        terminalLines.forEach(line => {
+            const text = line.textContent;
+            line.textContent = '';
+            
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    line.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                }
+            }, 20);
+        });
+
+        // Project tabs functionality
+        document.querySelectorAll('.project-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and categories
+                document.querySelectorAll('.project-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.project-category').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding category
+                tab.classList.add('active');
+                const categoryId = tab.getAttribute('data-category');
+                document.getElementById(categoryId).classList.add('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add flicker effect to random elements
+        const flickerElements = document.querySelectorAll('.flicker');
+        flickerElements.forEach(el => {
+            const delay = Math.random() * 5;
+            el.style.animationDelay = `${delay}s`;
+        });
+
+        // Add floating effect to random elements
+        const floatingElements = document.querySelectorAll('.floating');
+        floatingElements.forEach(el => {
+            const delay = Math.random() * 3;
+            el.style.animationDelay = `${delay}s`;
+        });
+    </script>
 </body>
 </html>
